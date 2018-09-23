@@ -1,0 +1,1067 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{homework-practice-01}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{ux43cux430ux448ux438ux43dux43dux43eux435-ux43eux431ux443ux447ux435ux43dux438ux435-ux444ux43aux43d-ux432ux448ux44d}{%
+\section{Машинное обучение, ФКН
+ВШЭ}\label{ux43cux430ux448ux438ux43dux43dux43eux435-ux43eux431ux443ux447ux435ux43dux438ux435-ux444ux43aux43d-ux432ux448ux44d}}
+
+\hypertarget{ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux435-ux437ux430ux434ux430ux43dux438ux435-1}{%
+\subsection{Практическое задание
+1}\label{ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux435-ux437ux430ux434ux430ux43dux438ux435-1}}
+
+\hypertarget{ux43eux431ux449ux430ux44f-ux438ux43dux444ux43eux440ux43cux430ux446ux438ux44f}{%
+\subsubsection{Общая
+информация}\label{ux43eux431ux449ux430ux44f-ux438ux43dux444ux43eux440ux43cux430ux446ux438ux44f}}
+
+Дата выдачи: 07.09.2018
+
+Мягкий дедлайн: 07:59MSK 15.09.2018 (за каждый день просрочки снимается
+1 балл)
+
+Жесткий дедлайн: 23:59MSK 16.09.2018
+
+    \hypertarget{ux43e-ux437ux430ux434ux430ux43dux438ux438}{%
+\subsubsection{О
+задании}\label{ux43e-ux437ux430ux434ux430ux43dux438ux438}}
+
+Задание состоит из двух разделов, посвященных работе с табличными
+данными с помощью библиотеки pandas и визуализации с помощью matplotlib.
+В каждом разделе вам предлагается выполнить несколько заданий. Баллы
+даются за выполнение отдельных пунктов. Задачи в рамках одного раздела
+рекомендуется решать в том порядке, в котором они даны в задании.
+
+Задание направлено на освоение jupyter notebook (будет использоваться в
+дальнейших заданиях), библиотекам pandas и matplotlib.
+
+\hypertarget{ux43eux446ux435ux43dux438ux432ux430ux43dux438ux435-ux438-ux448ux442ux440ux430ux444ux44b}{%
+\subsubsection{Оценивание и
+штрафы}\label{ux43eux446ux435ux43dux438ux432ux430ux43dux438ux435-ux438-ux448ux442ux440ux430ux444ux44b}}
+
+Каждая из задач имеет определенную «стоимость» (указана в скобках около
+задачи). Максимально допустимая оценка за работу --- 10 баллов.
+
+Сдавать задание после указанного срока сдачи нельзя. При выставлении
+неполного балла за задание в связи с наличием ошибок на усмотрение
+проверяющего предусмотрена возможность исправить работу на указанных в
+ответном письме условиях.
+
+Задание выполняется самостоятельно. «Похожие» решения считаются
+плагиатом и все задействованные студенты (в том числе те, у кого
+списали) не могут получить за него больше 0 баллов (подробнее о плагиате
+см. на странице курса). Если вы нашли решение какого-то из заданий (или
+его часть) в открытом источнике, необходимо указать ссылку на этот
+источник в отдельном блоке в конце вашей работы (скорее всего вы будете
+не единственным, кто это нашел, поэтому чтобы исключить подозрение в
+плагиате, необходима ссылка на источник).
+
+\hypertarget{ux444ux43eux440ux43cux430ux442-ux441ux434ux430ux447ux438}{%
+\subsubsection{Формат
+сдачи}\label{ux444ux43eux440ux43cux430ux442-ux441ux434ux430ux447ux438}}
+
+Задания сдаются через систему Anytask. Инвайт можно найти на странице
+курса. Присылать необходимо ноутбук с выполненным заданием.
+
+Для удобства проверки самостоятельно посчитайте свою максимальную оценку
+(исходя из набора решенных задач) и укажите ниже.
+
+Оценка: xx.
+
+    \hypertarget{ux432ux432ux435ux434ux435ux43dux438ux435}{%
+\subsection{0.
+Введение}\label{ux432ux432ux435ux434ux435ux43dux438ux435}}
+
+    Сейчас мы находимся в jupyter-ноутбуке (или ipython-ноутбуке). Это
+удобная среда для написания кода, проведения экспериментов, изучения
+данных, построения визуализаций и других нужд, не связанных с написаем
+production-кода.
+
+Ноутбук состоит из ячеек, каждая из которых может быть либо ячейкой с
+кодом, либо ячейкой с текстом размеченным и неразмеченным. Текст
+поддерживает markdown-разметку и формулы в Latex.
+
+Для работы с содержимым ячейки используется \emph{режим редактирования}
+(\emph{Edit mode}, включается нажатием клавиши \textbf{Enter} после
+выбора ячейки), а для навигации между ячейками искользуется
+\emph{командный режим} (\emph{Command mode}, включается нажатием клавиши
+\textbf{Esc}). Тип ячейки можно задать в командном режиме либо с помощью
+горячих клавиш (\textbf{y} to code, \textbf{m} to markdown, \textbf{r}
+to edit raw text), либо в меню \emph{Cell -\textgreater{} Cell type}.
+
+После заполнения ячейки нужно нажать \emph{Shift + Enter}, эта команда
+обработает содержимое ячейки: проинтерпретирует код или сверстает
+размеченный текст.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} ячейка с кодом, при выполнении которой появится output}
+        \PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} 4
+\end{Verbatim}
+            
+    А это \textbf{\emph{ячейка с текстом}}.
+Ячейка с неразмеченыным текстом.
+    Попробуйте создать свои ячейки, написать какой-нибудь код и текст
+какой-нибудь формулой.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hello, World}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Hello, World
+
+    \end{Verbatim}
+
+    \hypertarget{ux432ux44bux432ux435ux434ux435ux43c-ux43aux430ux43aux443ux44e-ux43dux438ux431ux443ux434ux44c-ux441ux43bux43eux436ux43dux443ux44e-ux444ux43eux440ux43cux443ux43bux443}{%
+\subsection{Выведем какую-нибудь сложную
+формулу}\label{ux432ux44bux432ux435ux434ux435ux43c-ux43aux430ux43aux443ux44e-ux43dux438ux431ux443ux434ux44c-ux441ux43bux43eux436ux43dux443ux44e-ux444ux43eux440ux43cux443ux43bux443}}
+
+\[\int{dx} = x + c\]
+
+    \href{https://athena.brynmawr.edu/jupyter/hub/dblank/public/Jupyter\%20Notebook\%20Users\%20Manual.ipynb}{Здесь}
+находится небольшая заметка о используемом языке разметки Markdown. Он
+позволяет:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{-1}
+\tightlist
+\item
+  Составлять упорядоченные списки
+\item
+  \#Делать \#\#заголовки \#\#\#разного уровня
+\item
+  Выделять \emph{текст} при \textbf{необходимости}
+\item
+  Добавлять
+  \href{http://imgs.xkcd.com/comics/the_universal_label.png}{ссылки}
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Составлять неупорядоченные списки
+\end{itemize}
+
+Делать вставки с помощью LaTex:
+
+\$ \left\{
+
+\begin{array}{ll}
+x = 16 \sin^3 (t) \\ 
+y = 13 \cos (t) - 5 \cos (2t) - 2 \cos (3t) - \cos (4t) \\
+t \in [0, 2 \pi]
+\end{array}
+
+\right.\$
+
+    \hypertarget{ux442ux430ux431ux43bux438ux447ux43dux44bux435-ux434ux430ux43dux43dux44bux435-ux438-pandas}{%
+\subsection{1. Табличные данные и
+Pandas}\label{ux442ux430ux431ux43bux438ux447ux43dux44bux435-ux434ux430ux43dux43dux44bux435-ux438-pandas}}
+
+    Pandas --- удобная библиотека для работы с табличными данными в Python,
+если данных не слишком много и они помещаются в оперативную память
+вашего компьютера. Несмотря на неэффективность реализации и некоторые
+проблемы, библиотека стала стандартом в анализе данных. С этой
+библиотекой мы сейчас и познакомимся.
+
+Основной объект в pandas это DataFrame, представляющий собой таблицу с
+именованными колонками различных типов, индексом (может быть
+многоуровневым). DataFrame можно создавать, считывая таблицу из файла
+или задавая вручную из других объектов.
+
+В этой части потребуется выполнить несколько небольших заданий. Можно
+пойти двумя путями: сначала изучить материалы, а потом приступить к
+заданиям, или же разбираться ``по ходу''. Выбирайте сами.
+
+Материалы: 1.
+\href{http://pandas.pydata.org/pandas-docs/stable/10min.html}{Pandas за
+10 минут из официального руководства} 2.
+\href{http://pandas.pydata.org/pandas-docs/stable/index.html}{Документация}
+(стоит обращаться, если не понятно, как вызывать конкретный метод) 3.
+\href{http://nbviewer.jupyter.org/github/justmarkham/pandas-videos/blob/master/pandas.ipynb}{Примеры
+использования функционала}
+
+Многие из заданий можно выполнить несколькими способами. Не существуют
+единственно верного, но попробуйте максимально задействовать арсенал
+pandas и ориентируйтесь на простоту и понятность вашего кода. Мы не
+будем подсказывать, что нужно использовать для решения конкретной
+задачи, попробуйте находить необходимый функционал сами (название метода
+чаще всего очевидно). В помощь вам документация, поиск и stackoverflow.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{o}{\PYZpc{}}\PY{k}{pylab} inline
+         \PY{c+c1}{\PYZsh{} import almost all we need}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Populating the interactive namespace from numpy and matplotlib
+
+    \end{Verbatim}
+
+    Данные можно скачать
+\href{https://www.dropbox.com/s/5qq94wzmbw4e54r/data.csv?dl=0}{отсюда}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{o}{!} wget \PYZhy{}nc https://www.dropbox.com/s/5qq94wzmbw4e54r/data.csv
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+File ‘data.csv’ already there; not retrieving.
+
+
+    \end{Verbatim}
+
+    \hypertarget{ux431ux430ux43bux43bux43eux432-ux43eux442ux43aux440ux43eux439ux442ux435-ux444ux430ux439ux43b-ux441-ux442ux430ux431ux43bux438ux446ux435ux439-ux43dux435-ux437ux430ux431ux443ux434ux44cux442ux435-ux43fux440ux43e-ux435ux451-ux444ux43eux440ux43cux430ux442.-ux432ux44bux432ux435ux434ux438ux442ux435-ux43fux43eux441ux43bux435ux434ux43dux438ux435-10-ux441ux442ux440ux43eux43a.}{%
+\paragraph{1. {[}0.5 баллов{]} Откройте файл с таблицей (не забудьте про
+её формат). Выведите последние 10
+строк.}\label{ux431ux430ux43bux43bux43eux432-ux43eux442ux43aux440ux43eux439ux442ux435-ux444ux430ux439ux43b-ux441-ux442ux430ux431ux43bux438ux446ux435ux439-ux43dux435-ux437ux430ux431ux443ux434ux44cux442ux435-ux43fux440ux43e-ux435ux451-ux444ux43eux440ux43cux430ux442.-ux432ux44bux432ux435ux434ux438ux442ux435-ux43fux43eux441ux43bux435ux434ux43dux438ux435-10-ux441ux442ux440ux43eux43a.}}
+
+Посмотрите на данные и скажите, что они из себя представляют, сколько в
+таблице строк, какие столбцы?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+      order_id  quantity            item_name  \
+4612      1831         1        Carnitas Bowl   
+4613      1831         1                Chips   
+4614      1831         1        Bottled Water   
+4615      1832         1   Chicken Soft Tacos   
+4616      1832         1  Chips and Guacamole   
+4617      1833         1        Steak Burrito   
+4618      1833         1        Steak Burrito   
+4619      1834         1   Chicken Salad Bowl   
+4620      1834         1   Chicken Salad Bowl   
+4621      1834         1   Chicken Salad Bowl   
+
+                                     choice_description item_price  
+4612  [Fresh Tomato Salsa, [Fajita Vegetables, Rice,...     $9.25   
+4613                                                NaN     $2.15   
+4614                                                NaN     $1.50   
+4615   [Fresh Tomato Salsa, [Rice, Cheese, Sour Cream]]     $8.75   
+4616                                                NaN     $4.45   
+4617  [Fresh Tomato Salsa, [Rice, Black Beans, Sour ...    $11.75   
+4618  [Fresh Tomato Salsa, [Rice, Sour Cream, Cheese...    $11.75   
+4619  [Fresh Tomato Salsa, [Fajita Vegetables, Pinto...    $11.25   
+4620  [Fresh Tomato Salsa, [Fajita Vegetables, Lettu...     $8.75   
+4621  [Fresh Tomato Salsa, [Fajita Vegetables, Pinto...     $8.75   
+    \end{verbatim}
+
+    
+    Это какие-то заказы, а вернее для заказа есть список продуктов, а для
+продукра есть свое описание и цена за него
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}88}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Колличество строк:}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Колличество столбцов:}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Имена столбцов:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{o}{*}\PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Колличество строк:	4622
+Колличество столбцов:	5
+Имена столбцов:
+	order\_id
+	quantity
+	item\_name
+	choice\_description
+	item\_price
+
+    \end{Verbatim}
+
+    \hypertarget{ux431ux430ux43bux43bux43eux432-ux43eux442ux432ux435ux442ux44cux442ux435-ux43dux430-ux432ux43eux43fux440ux43eux441ux44b}{%
+\paragraph{2. {[}0.25 баллов{]} Ответьте на
+вопросы:}\label{ux431ux430ux43bux43bux43eux432-ux43eux442ux432ux435ux442ux44cux442ux435-ux43dux430-ux432ux43eux43fux440ux43eux441ux44b}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Сколько заказов попало в выборку?
+\item
+  Сколько уникальных категорий товара было куплено? (item\_name)
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1. Заказов попало }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PYZbs{}
+               \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2. Уникальных товаров было куплено }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}}
+               \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{order\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{item\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1. Заказов попало 1834.
+2. Уникальных товаров было куплено 50
+
+    \end{Verbatim}
+
+    \hypertarget{ux431ux430ux43bux43bux43eux432-ux435ux441ux442ux44c-ux43bux438-ux432-ux434ux430ux43dux43dux44bux445-ux43fux440ux43eux43fux443ux441ux43aux438-ux432-ux43aux430ux43aux438ux445-ux43aux43eux43bux43eux43dux43aux430ux445}{%
+\paragraph{3. {[}0.25 баллов{]} Есть ли в данных пропуски? В каких
+колонках?}\label{ux431ux430ux43bux43bux43eux432-ux435ux441ux442ux44c-ux43bux438-ux432-ux434ux430ux43dux43dux44bux445-ux43fux440ux43eux43fux443ux441ux43aux438-ux432-ux43aux430ux43aux438ux445-ux43aux43eux43bux43eux43dux43aux430ux445}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+order\_id              False
+quantity              False
+item\_name             False
+choice\_description     True
+item\_price            False
+dtype: bool
+
+    \end{Verbatim}
+
+    \hypertarget{ux43aux430ux43a-ux432ux438ux434ux438ux43c-ux43bux438ux448ux44c-ux43aux43eux43bux43eux43dux43aux430-ux441-ux43eux43fux438ux441ux430ux43dux438ux435ux43c-ux43cux43eux436ux435ux442-ux431ux44bux442ux44c-ux43fux443ux441ux442ux43eux439}{%
+\paragraph{Как видим лишь колонка с описанием может быть
+пустой}\label{ux43aux430ux43a-ux432ux438ux434ux438ux43c-ux43bux438ux448ux44c-ux43aux43eux43bux43eux43dux43aux430-ux441-ux43eux43fux438ux441ux430ux43dux438ux435ux43c-ux43cux43eux436ux435ux442-ux431ux44bux442ux44c-ux43fux443ux441ux442ux43eux439}}
+
+    Заполните пропуски пустой строкой для строковых колонок и нулём для
+числовых.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}91}]:} \PY{k}{def} \PY{n+nf}{FillNaNs}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fillValues} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+             \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{df}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{o}{.}\PY{n}{dtype} \PY{o}{==} \PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{:}
+                     \PY{n}{fillValues}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{fillValues}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+             \PY{k}{return} \PY{n}{df}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{value}\PY{o}{=}\PY{n}{fillValues}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{n}{df} \PY{o}{=} \PY{n}{FillNaNs}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}92}]:} order\_id              False
+         quantity              False
+         item\_name             False
+         choice\_description    False
+         item\_price            False
+         dtype: bool
+\end{Verbatim}
+            
+    Как видим значения NaN пропали
+
+    \hypertarget{ux431ux430ux43bux43bux43eux432-ux43fux43eux441ux43cux43eux442ux440ux438ux442ux435-ux432ux43dux438ux43cux430ux442ux435ux43bux44cux43dux435ux435-ux43dux430-ux43aux43eux43bux43eux43dux43aux443-ux441-ux446ux435ux43dux43eux439-ux442ux43eux432ux430ux440ux430.-ux43aux430ux43aux43eux433ux43e-ux43eux43dux430-ux442ux438ux43fux430-ux441ux43eux437ux434ux430ux439ux442ux435-ux43dux43eux432ux443ux44e-ux43aux43eux43bux43eux43dux43aux443-ux442ux430ux43a-ux447ux442ux43eux431ux44b-ux432-ux43dux435ux439-ux446ux435ux43dux430-ux431ux44bux43bux430-ux447ux438ux441ux43bux43eux43c.}{%
+\paragraph{4. {[}0.5 баллов{]} Посмотрите внимательнее на колонку с
+ценой товара. Какого она типа? Создайте новую колонку так, чтобы в ней
+цена была
+числом.}\label{ux431ux430ux43bux43bux43eux432-ux43fux43eux441ux43cux43eux442ux440ux438ux442ux435-ux432ux43dux438ux43cux430ux442ux435ux43bux44cux43dux435ux435-ux43dux430-ux43aux43eux43bux43eux43dux43aux443-ux441-ux446ux435ux43dux43eux439-ux442ux43eux432ux430ux440ux430.-ux43aux430ux43aux43eux433ux43e-ux43eux43dux430-ux442ux438ux43fux430-ux441ux43eux437ux434ux430ux439ux442ux435-ux43dux43eux432ux443ux44e-ux43aux43eux43bux43eux43dux43aux443-ux442ux430ux43a-ux447ux442ux43eux431ux44b-ux432-ux43dux435ux439-ux446ux435ux43dux430-ux431ux44bux43bux430-ux447ux438ux441ux43bux43eux43c.}}
+
+Для этого попробуйте применить функцию-преобразование к каждой строке
+вашей таблицы (для этого есть соответствующая функция).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{item\PYZus{}price\PYZus{}all}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{item\PYZus{}price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{item\PYZus{}price\PYZus{}numeric}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{item\PYZus{}price\PYZus{}all}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quantity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{display}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+   order_id  quantity                              item_name  \
+0         1         1           Chips and Fresh Tomato Salsa   
+1         1         1                                   Izze   
+2         1         1                       Nantucket Nectar   
+3         1         1  Chips and Tomatillo-Green Chili Salsa   
+4         2         2                           Chicken Bowl   
+5         3         1                           Chicken Bowl   
+6         3         1                          Side of Chips   
+7         4         1                          Steak Burrito   
+8         4         1                       Steak Soft Tacos   
+9         5         1                          Steak Burrito   
+
+                                  choice_description item_price  \
+0                                                        $2.39    
+1                                       [Clementine]     $3.39    
+2                                            [Apple]     $3.39    
+3                                                        $2.39    
+4  [Tomatillo-Red Chili Salsa (Hot), [Black Beans...    $16.98    
+5  [Fresh Tomato Salsa (Mild), [Rice, Cheese, Sou...    $10.98    
+6                                                        $1.69    
+7  [Tomatillo Red Chili Salsa, [Fajita Vegetables...    $11.75    
+8  [Tomatillo Green Chili Salsa, [Pinto Beans, Ch...     $9.25    
+9  [Fresh Tomato Salsa, [Rice, Black Beans, Pinto...     $9.25    
+
+   item_price_all  item_price_numeric  
+0            2.39                2.39  
+1            3.39                3.39  
+2            3.39                3.39  
+3            2.39                2.39  
+4           16.98                8.49  
+5           10.98               10.98  
+6            1.69                1.69  
+7           11.75               11.75  
+8            9.25                9.25  
+9            9.25                9.25  
+    \end{verbatim}
+
+    
+    Цена в долларах указана(наверное, в конфе ``флуд по МО'' по крайней мере
+так сказали) за кол-во продуктов. Так, например, за соду в двух
+экземплярах просили \(1.09 \cdot 2\), но в основном цена за одну есть
+\(1.09\). Поэтому логично разделить на кол-во
+
+    Какая средняя/минимальная/максимальная цена у товара?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Средяя цена товара }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{item\PYZus{}price\PYZus{}numeric}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Минимальная цена товара }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{item\PYZus{}price\PYZus{}numeric}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Максимальная цена товара }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{item\PYZus{}price\PYZus{}numeric}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Средяя цена товара 7.08
+Минимальная цена товара 1.09
+Максимальная цена товара 11.89
+
+    \end{Verbatim}
+
+    Удалите старую колонку с ценой.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{item\PYZus{}price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+   order_id  quantity                              item_name  \
+0         1         1           Chips and Fresh Tomato Salsa   
+1         1         1                                   Izze   
+2         1         1                       Nantucket Nectar   
+3         1         1  Chips and Tomatillo-Green Chili Salsa   
+4         2         2                           Chicken Bowl   
+5         3         1                           Chicken Bowl   
+6         3         1                          Side of Chips   
+7         4         1                          Steak Burrito   
+8         4         1                       Steak Soft Tacos   
+9         5         1                          Steak Burrito   
+
+                                  choice_description  item_price_all  \
+0                                                               2.39   
+1                                       [Clementine]            3.39   
+2                                            [Apple]            3.39   
+3                                                               2.39   
+4  [Tomatillo-Red Chili Salsa (Hot), [Black Beans...           16.98   
+5  [Fresh Tomato Salsa (Mild), [Rice, Cheese, Sou...           10.98   
+6                                                               1.69   
+7  [Tomatillo Red Chili Salsa, [Fajita Vegetables...           11.75   
+8  [Tomatillo Green Chili Salsa, [Pinto Beans, Ch...            9.25   
+9  [Fresh Tomato Salsa, [Rice, Black Beans, Pinto...            9.25   
+
+   item_price_numeric  
+0                2.39  
+1                3.39  
+2                3.39  
+3                2.39  
+4                8.49  
+5               10.98  
+6                1.69  
+7               11.75  
+8                9.25  
+9                9.25  
+    \end{verbatim}
+
+    
+    \hypertarget{ux431ux430ux43bux43bux43eux432-ux43aux430ux43aux438ux435-5-ux442ux43eux432ux430ux440ux43eux432-ux431ux44bux43bux438-ux441ux430ux43cux44bux43cux438-ux434ux435ux448ux451ux432ux44bux43cux438-ux438-ux441ux430ux43cux44bux43cux438-ux434ux43eux440ux43eux433ux438ux43cux438-ux43fux43e-choice_description}{%
+\paragraph{5. {[}0.25 баллов{]} Какие 5 товаров были самыми дешёвыми и
+самыми дорогими? (по
+choice\_description)}\label{ux431ux430ux43bux43bux43eux432-ux43aux430ux43aux438ux435-5-ux442ux43eux432ux430ux440ux43eux432-ux431ux44bux43bux438-ux441ux430ux43cux44bux43cux438-ux434ux435ux448ux451ux432ux44bux43cux438-ux438-ux441ux430ux43cux44bux43cux438-ux434ux43eux440ux43eux433ux438ux43cux438-ux43fux43e-choice_description}}
+
+Для этого будет удобно избавиться от дубликатов и отсортировать товары.
+Не забудьте про количество товара.
+
+    Будем считать, что товары одинаковые, если совпадают 3 поля: item\_name
+choice\_description item\_price\_numeric
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}96}]:} \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{p}{)}
+         \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{item\PYZus{}price\PYZus{}numeric}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{sorted\PYZus{}df\PYZus{}by\PYZus{}price} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n}{sorted\PYZus{}df\PYZus{}by\PYZus{}price}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n}{sorted\PYZus{}df\PYZus{}by\PYZus{}price}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+      order_id  quantity      item_name choice_description  item_price_all  \
+780        321         1  Bottled Water                               1.09   
+3254      1303         1    Canned Soda           [Sprite]            1.09   
+352        151         2    Canned Soda        [Coca Cola]            2.18   
+1662       672         1    Canned Soda        [Diet Coke]            1.09   
+350        150         2    Canned Soda        [Diet Coke]            2.18   
+
+      item_price_numeric  
+780                 1.09  
+3254                1.09  
+352                 1.09  
+1662                1.09  
+350                 1.09  
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+      order_id  quantity            item_name  \
+1159       478         1     Steak Salad Bowl   
+3546      1426         1  Barbacoa Salad Bowl   
+606        250         1     Steak Salad Bowl   
+1505       612         1     Steak Salad Bowl   
+1326       541         1  Barbacoa Salad Bowl   
+
+                                     choice_description  item_price_all  \
+1159  [Fresh Tomato Salsa, [Rice, Fajita Vegetables,...           11.89   
+3546                    [Fresh Tomato Salsa, Guacamole]           11.89   
+606   [Fresh Tomato Salsa, [Pinto Beans, Cheese, Gua...           11.89   
+1505  [Fresh Tomato Salsa, [Rice, Pinto Beans, Chees...           11.89   
+1326  [Fresh Tomato Salsa, [Fajita Vegetables, Rice,...           11.89   
+
+      item_price_numeric  
+1159               11.89  
+3546               11.89  
+606                11.89  
+1505               11.89  
+1326               11.89  
+    \end{verbatim}
+
+    
+    \hypertarget{ux431ux430ux43bux43bux43eux432-ux441ux43aux43eux43bux44cux43aux43e-ux440ux430ux437-ux43aux43bux438ux435ux43dux442ux44b-ux43fux43eux43aux443ux43fux430ux43bux438-ux431ux43eux43bux44cux448ux435-1-chicken-bowl-item_name}{%
+\paragraph{6. {[}0.5 баллов{]} Сколько раз клиенты покупали больше 1
+Chicken Bowl
+(item\_name)?}\label{ux431ux430ux43bux43bux43eux432-ux441ux43aux43eux43bux44cux43aux43e-ux440ux430ux437-ux43aux43bux438ux435ux43dux442ux44b-ux43fux43eux43aux443ux43fux430ux43bux438-ux431ux43eux43bux44cux448ux435-1-chicken-bowl-item_name}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{n}{chicken\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{item\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chicken Bowl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{p}{(}\PY{n}{chicken\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quantity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}97}]:} 33
+\end{Verbatim}
+            
+    \hypertarget{ux431ux430ux43bux43bux43eux432-ux43aux430ux43aux43eux439-ux441ux440ux435ux434ux43dux438ux439-ux447ux435ux43a-ux443-ux437ux430ux43aux430ux437ux430-ux441ux43aux43eux43bux44cux43aux43e-ux432-ux441ux440ux435ux434ux43dux435ux43c-ux442ux43eux432ux430ux440ux43eux432-ux43fux43eux43aux443ux43fux430ux44eux442}{%
+\subsection{7. {[}0.5 баллов{]} Какой средний чек у заказа? Сколько в
+среднем товаров
+покупают?}\label{ux431ux430ux43bux43bux43eux432-ux43aux430ux43aux43eux439-ux441ux440ux435ux434ux43dux438ux439-ux447ux435ux43a-ux443-ux437ux430ux43aux430ux437ux430-ux441ux43aux43eux43bux44cux43aux43e-ux432-ux441ux440ux435ux434ux43dux435ux43c-ux442ux43eux432ux430ux440ux43eux432-ux43fux43eux43aux443ux43fux430ux44eux442}}
+
+Если необходимо провести вычисления в терминах заказов, то будет удобно
+сгруппировать строки по заказам и посчитать необходимые статистики.
+
+    Группируем по id заказа, складываем цены за каждый товар, берем среднее
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}117}]:} \PY{n}{group} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{order\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{group}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{item\PYZus{}price\PYZus{}all}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}117}]:} 18.635359869138494
+\end{Verbatim}
+            
+    \hypertarget{ux431ux430ux43bux43bux43eux432-ux441ux43aux43eux43bux44cux43aux43e-ux437ux430ux43aux430ux437ux43eux432-ux441ux43eux434ux435ux440ux436ux430ux43bux438-ux440ux43eux432ux43dux43e-1-ux442ux43eux432ux430ux440}{%
+\paragraph{8. {[}0.25 баллов{]} Сколько заказов содержали ровно 1
+товар?}\label{ux431ux430ux43bux43bux43eux432-ux441ux43aux43eux43bux44cux43aux43e-ux437ux430ux43aux430ux437ux43eux432-ux441ux43eux434ux435ux440ux436ux430ux43bux438-ux440ux43eux432ux43dux43e-1-ux442ux43eux432ux430ux440}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}119}]:} \PY{p}{(}\PY{n}{group}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}119}]:} 135
+\end{Verbatim}
+            
+    \hypertarget{ux431ux430ux43bux43bux43eux432-ux43aux430ux43aux430ux44f-ux441ux430ux43cux430ux44f-ux43fux43eux43fux443ux43bux44fux440ux43dux430ux44f-ux43aux430ux442ux435ux433ux43eux440ux438ux44f-ux442ux43eux432ux430ux440ux430}{%
+\paragraph{9. {[}0.25 баллов{]} Какая самая популярная категория
+товара?}\label{ux431ux430ux43bux43bux43eux432-ux43aux430ux43aux430ux44f-ux441ux430ux43cux430ux44f-ux43fux43eux43fux443ux43bux44fux440ux43dux430ux44f-ux43aux430ux442ux435ux433ux43eux440ux438ux44f-ux442ux43eux432ux430ux440ux430}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}122}]:} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{item\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quantity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{idxmax}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}122}]:} 'Chicken Bowl'
+\end{Verbatim}
+            
+    \hypertarget{ux431ux430ux43bux43bux43eux432-ux43aux430ux43aux438ux435-ux432ux438ux434ux44b-burrito-ux441ux443ux449ux435ux441ux442ux432ux443ux44eux442-ux43aux430ux43aux43eux439-ux438ux437-ux43dux438ux445-ux447ux430ux449ux435-ux432ux441ux435ux433ux43e-ux43fux43eux43aux443ux43fux430ux44eux442-ux43aux430ux43aux43eux439-ux438ux437-ux43dux438ux445-ux441ux430ux43cux44bux439-ux434ux43eux440ux43eux433ux43eux439}{%
+\paragraph{10. {[}0.5 баллов{]} Какие виды Burrito существуют? Какой из
+них чаще всего покупают? Какой из них самый
+дорогой?}\label{ux431ux430ux43bux43bux43eux432-ux43aux430ux43aux438ux435-ux432ux438ux434ux44b-burrito-ux441ux443ux449ux435ux441ux442ux432ux443ux44eux442-ux43aux430ux43aux43eux439-ux438ux437-ux43dux438ux445-ux447ux430ux449ux435-ux432ux441ux435ux433ux43e-ux43fux43eux43aux443ux43fux430ux44eux442-ux43aux430ux43aux43eux439-ux438ux437-ux43dux438ux445-ux441ux430ux43cux44bux439-ux434ux43eux440ux43eux433ux43eux439}}
+
+    \hypertarget{ux431ux430ux43bux43bux43eux432-ux432-ux43aux430ux43aux43eux43c-ux43aux43eux43bux438ux447ux435ux441ux442ux432ux435-ux437ux430ux43aux430ux437ux43eux432-ux435ux441ux442ux44c-ux442ux43eux432ux430ux440-ux43aux43eux442ux43eux440ux44bux439-ux441ux442ux43eux438ux442-ux431ux43eux43bux435ux435-40-ux43eux442-ux441ux443ux43cux43cux44b-ux432ux441ux435ux433ux43e-ux447ux435ux43aux430}{%
+\paragraph{11. {[}0.75 баллов{]} В каком количестве заказов есть товар,
+который стоит более 40\% от суммы всего
+чека?}\label{ux431ux430ux43bux43bux43eux432-ux432-ux43aux430ux43aux43eux43c-ux43aux43eux43bux438ux447ux435ux441ux442ux432ux435-ux437ux430ux43aux430ux437ux43eux432-ux435ux441ux442ux44c-ux442ux43eux432ux430ux440-ux43aux43eux442ux43eux440ux44bux439-ux441ux442ux43eux438ux442-ux431ux43eux43bux435ux435-40-ux43eux442-ux441ux443ux43cux43cux44b-ux432ux441ux435ux433ux43e-ux447ux435ux43aux430}}
+
+Возможно, будет удобно посчитать отдельно средний чек, добавить его в
+исходные данные и сделать необходимые проверки.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} your code}
+\end{Verbatim}
+
+
+    \hypertarget{ux431ux430ux43bux43bux43eux432-ux43fux440ux435ux434ux43fux43eux43bux43eux436ux438ux43c-ux447ux442ux43e-ux432-ux434ux430ux43dux43dux44bux445-ux431ux44bux43bux430-ux43eux448ux438ux431ux43aux430-ux438-diet-coke-choice_description-ux43aux43eux442ux43eux440ux44bux439-ux441ux442ux43eux438ux43b-1.25-ux434ux43eux43bux436ux435ux43d-ux431ux44bux43b-ux441ux442ux43eux438ux442ux44c-1.35.-ux441ux43aux43eux440ux440ux435ux43aux442ux438ux440ux443ux439ux442ux435-ux434ux430ux43dux43dux44bux435-ux432-ux442ux430ux431ux43bux438ux446ux44b-ux438-ux43fux43eux441ux447ux438ux442ux430ux439ux442ux435-ux43dux430-ux43aux430ux43aux43eux439-ux43fux440ux43eux446ux435ux43dux442-ux431ux43eux43bux44cux448ux435-ux434ux435ux43dux435ux433-ux431ux44bux43bux43e-ux437ux430ux440ux430ux431ux43eux442ux430ux43dux43e-ux441-ux44dux442ux43eux433ux43e-ux442ux43eux432ux430ux440ux430.-ux43dux435-ux437ux430ux431ux44bux432ux430ux439ux442ux435-ux447ux442ux43e-ux43aux43eux43bux438ux447ux435ux441ux442ux432ux43e-ux442ux43eux432ux430ux440ux430-ux43dux435-ux432ux441ux435ux433ux434ux430-ux440ux430ux432ux43dux43e-1.}{%
+\paragraph{12. {[}0.75 баллов{]} Предположим, что в данных была ошибка и
+Diet Coke (choice\_description), который стоил \$1.25, должен был стоить
+1.35. Скорректируйте данные в таблицы и посчитайте, на какой процент
+больше денег было заработано с этого товара. Не забывайте, что
+количество товара не всегда равно
+1.}\label{ux431ux430ux43bux43bux43eux432-ux43fux440ux435ux434ux43fux43eux43bux43eux436ux438ux43c-ux447ux442ux43e-ux432-ux434ux430ux43dux43dux44bux445-ux431ux44bux43bux430-ux43eux448ux438ux431ux43aux430-ux438-diet-coke-choice_description-ux43aux43eux442ux43eux440ux44bux439-ux441ux442ux43eux438ux43b-1.25-ux434ux43eux43bux436ux435ux43d-ux431ux44bux43b-ux441ux442ux43eux438ux442ux44c-1.35.-ux441ux43aux43eux440ux440ux435ux43aux442ux438ux440ux443ux439ux442ux435-ux434ux430ux43dux43dux44bux435-ux432-ux442ux430ux431ux43bux438ux446ux44b-ux438-ux43fux43eux441ux447ux438ux442ux430ux439ux442ux435-ux43dux430-ux43aux430ux43aux43eux439-ux43fux440ux43eux446ux435ux43dux442-ux431ux43eux43bux44cux448ux435-ux434ux435ux43dux435ux433-ux431ux44bux43bux43e-ux437ux430ux440ux430ux431ux43eux442ux430ux43dux43e-ux441-ux44dux442ux43eux433ux43e-ux442ux43eux432ux430ux440ux430.-ux43dux435-ux437ux430ux431ux44bux432ux430ux439ux442ux435-ux447ux442ux43e-ux43aux43eux43bux438ux447ux435ux441ux442ux432ux43e-ux442ux43eux432ux430ux440ux430-ux43dux435-ux432ux441ux435ux433ux434ux430-ux440ux430ux432ux43dux43e-1.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} your code}
+\end{Verbatim}
+
+
+    \hypertarget{ux431ux430ux43bux43bux43eux432-ux441ux43eux437ux434ux430ux439ux442ux435-ux43dux43eux432ux44bux439-dateframe-ux438ux437-ux43cux430ux442ux440ux438ux446ux44b-ux441ux43eux437ux434ux430ux43dux43dux43eux439-ux43dux438ux436ux435.-ux43dux430ux437ux43eux432ux438ux442ux435-ux43aux43eux43bux43eux43dux43aux438-index-column1-column2-ux438-ux441ux434ux435ux43bux430ux439ux442ux435-ux43fux435ux440ux432ux443ux44e-ux43aux43eux43bux43eux43dux43aux443-ux438ux43dux434ux435ux43aux441ux43eux43c.}{%
+\paragraph{13. {[}0.75 баллов{]} Создайте новый DateFrame из матрицы,
+созданной ниже. Назовите колонки index, column1, column2 и сделайте
+первую колонку
+индексом.}\label{ux431ux430ux43bux43bux43eux432-ux441ux43eux437ux434ux430ux439ux442ux435-ux43dux43eux432ux44bux439-dateframe-ux438ux437-ux43cux430ux442ux440ux438ux446ux44b-ux441ux43eux437ux434ux430ux43dux43dux43eux439-ux43dux438ux436ux435.-ux43dux430ux437ux43eux432ux438ux442ux435-ux43aux43eux43bux43eux43dux43aux438-index-column1-column2-ux438-ux441ux434ux435ux43bux430ux439ux442ux435-ux43fux435ux440ux432ux443ux44e-ux43aux43eux43bux43eux43dux43aux443-ux438ux43dux434ux435ux43aux441ux43eux43c.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} your code}
+\end{Verbatim}
+
+
+    Сохраните DataFrame на диск в формате csv без индексов и названий
+столбцов.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} your code}
+\end{Verbatim}
+
+
+    \hypertarget{ux432ux438ux437ux443ux430ux43bux438ux437ux430ux446ux438ux438-ux438-matplotlib}{%
+\subsection{2. Визуализации и
+matplotlib}\label{ux432ux438ux437ux443ux430ux43bux438ux437ux430ux446ux438ux438-ux438-matplotlib}}
+
+    При работе с данными часто неудобно делать какие-то выводы, если
+смотреть на таблицу и числа в частности, поэтому важно уметь
+визуализировать данные. В этом разделе мы этим и займёмся.
+
+У matplotlib, конечно, же есть
+\href{https://matplotlib.org/users/index.html}{документация} с большим
+количеством \href{https://matplotlib.org/examples/}{примеров}, но для
+начала достаточно знать про несколько основных типов графиков: - plot
+--- обычный поточечный график, которым можно изображать кривые или
+отдельные точки; - hist --- гистограмма, показывающая распределение
+некоторое величины; - scatter --- график, показывающий взаимосвязь двух
+величин; - bar --- столбцовый график, показывающий взаимосвязь
+количественной величины от категориальной.
+
+В этом задании вы попробуете построить каждый из них. Не менее важно
+усвоить базовые принципы визуализаций: - на графиках должны быть
+подписаны оси; - у визуализации должно быть название; - если изображено
+несколько графиков, то необходима поясняющая легенда; - все линии на
+графиках должны быть чётко видны (нет похожих цветов или цветов,
+сливающихся с фоном); - если отображена величина, имеющая очевидный
+диапазон значений (например, проценты могут быть от 0 до 100), то
+желательно масштабировать ось на весь диапазон значений (исключением
+является случай, когда вам необходимо показать малое отличие, которое
+незаметно в таких масштабах).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline  \PYZsh{} нужно для отображения графиков внутри ноутбука
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+UsageError: unrecognized arguments: \# нужно для отображения графиков внутри ноутбука
+
+    \end{Verbatim}
+
+    На самом деле мы уже импортировали matplotlib внутри \%pylab inline в
+начале задания.
+
+Работать мы будем с той же выборкой покупкок. Добавим новую колонку с
+датой покупки.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{datetime}
+        
+        \PY{n}{start} \PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2018}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{end} \PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{datetime}\PY{p}{(}\PY{l+m+mi}{2018}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{31}\PY{p}{)}
+        \PY{n}{delta\PYZus{}seconds} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{p}{(}\PY{n}{end} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{)}\PY{o}{.}\PY{n}{total\PYZus{}seconds}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{dates} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{order\PYZus{}id}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}
+            \PY{p}{(}\PY{n}{start} \PY{o}{+} \PY{n}{datetime}\PY{o}{.}\PY{n}{timedelta}\PY{p}{(}\PY{n}{seconds}\PY{o}{=}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{delta\PYZus{}seconds}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{strftime}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{Y\PYZhy{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{m\PYZhy{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{order\PYZus{}id}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} если DataFrame с покупками из прошлого заказа называется не df, замените на ваше название ниже}
+        \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{order\PYZus{}id}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{dates}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{ux431ux430ux43bux43b-ux43fux43eux441ux442ux440ux43eux439ux442ux435-ux433ux438ux441ux442ux43eux433ux440ux430ux43cux43cux443-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux44f-ux441ux443ux43cux43c-ux43fux43eux43aux443ux43fux43eux43a-ux438-ux433ux438ux441ux442ux43eux433ux440ux430ux43cux43cux443-ux441ux440ux435ux434ux43dux438ux445-ux446ux435ux43d-ux43eux442ux434ux435ux43bux44cux43dux44bux445-ux432ux438ux434ux43eux432-ux43fux440ux43eux434ux443ux43aux442ux43eux432-item_name.}{%
+\paragraph{1. {[}1 балл{]} Постройте гистограмму распределения сумм
+покупок и гистограмму средних цен отдельных видов продуктов
+item\_name.}\label{ux431ux430ux43bux43b-ux43fux43eux441ux442ux440ux43eux439ux442ux435-ux433ux438ux441ux442ux43eux433ux440ux430ux43cux43cux443-ux440ux430ux441ux43fux440ux435ux434ux435ux43bux435ux43dux438ux44f-ux441ux443ux43cux43c-ux43fux43eux43aux443ux43fux43eux43a-ux438-ux433ux438ux441ux442ux43eux433ux440ux430ux43cux43cux443-ux441ux440ux435ux434ux43dux438ux445-ux446ux435ux43d-ux43eux442ux434ux435ux43bux44cux43dux44bux445-ux432ux438ux434ux43eux432-ux43fux440ux43eux434ux443ux43aux442ux43eux432-item_name.}}
+
+Изображайте на двух соседних графиках. Для этого может быть полезен
+subplot.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} your code}
+\end{Verbatim}
+
+
+    \hypertarget{ux431ux430ux43bux43b-ux43fux43eux441ux442ux440ux43eux439ux442ux435-ux433ux440ux430ux444ux438ux43a-ux437ux430ux432ux438ux441ux438ux43cux43eux441ux442ux438-ux441ux443ux43cux43cux44b-ux43fux43eux43aux443ux43fux43eux43a-ux43eux442-ux434ux43dux435ux439.}{%
+\paragraph{2. {[}1 балл{]} Постройте график зависимости суммы покупок от
+дней.}\label{ux431ux430ux43bux43b-ux43fux43eux441ux442ux440ux43eux439ux442ux435-ux433ux440ux430ux444ux438ux43a-ux437ux430ux432ux438ux441ux438ux43cux43eux441ux442ux438-ux441ux443ux43cux43cux44b-ux43fux43eux43aux443ux43fux43eux43a-ux43eux442-ux434ux43dux435ux439.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} your code}
+\end{Verbatim}
+
+
+    \hypertarget{ux431ux430ux43bux43b-ux43fux43eux441ux442ux440ux43eux439ux442ux435-ux441ux440ux435ux434ux43dux438ux445-ux441ux443ux43cux43c-ux43fux43eux43aux443ux43fux43eux43a-ux43fux43e-ux434ux43dux44fux43c-ux43dux435ux434ux435ux43bux438-bar-plot.}{%
+\paragraph{3. {[}1 балл{]} Постройте средних сумм покупок по дням недели
+(bar
+plot).}\label{ux431ux430ux43bux43b-ux43fux43eux441ux442ux440ux43eux439ux442ux435-ux441ux440ux435ux434ux43dux438ux445-ux441ux443ux43cux43c-ux43fux43eux43aux443ux43fux43eux43a-ux43fux43e-ux434ux43dux44fux43c-ux43dux435ux434ux435ux43bux438-bar-plot.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} your code}
+\end{Verbatim}
+
+
+    \hypertarget{ux431ux430ux43bux43b-ux43fux43eux441ux442ux440ux43eux439ux442ux435-ux433ux440ux430ux444ux438ux43a-ux437ux430ux432ux438ux441ux438ux43cux43eux441ux442ux438-ux434ux435ux43dux435ux433-ux437ux430-ux442ux43eux432ux430ux440-ux43eux442-ux43aux443ux43fux43bux435ux43dux43dux43eux433ux43e-ux43aux43eux43bux438ux447ux435ux441ux442ux432ux430-scatter-plot.}{%
+\paragraph{4. {[}1 балл{]} Постройте график зависимости денег за товар
+от купленного количества (scatter
+plot).}\label{ux431ux430ux43bux43b-ux43fux43eux441ux442ux440ux43eux439ux442ux435-ux433ux440ux430ux444ux438ux43a-ux437ux430ux432ux438ux441ux438ux43cux43eux441ux442ux438-ux434ux435ux43dux435ux433-ux437ux430-ux442ux43eux432ux430ux440-ux43eux442-ux43aux443ux43fux43bux435ux43dux43dux43eux433ux43e-ux43aux43eux43bux438ux447ux435ux441ux442ux432ux430-scatter-plot.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} your code}
+\end{Verbatim}
+
+
+    Сохраните график в формате pdf (так он останется векторизованным).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} your code}
+\end{Verbatim}
+
+
+    Кстати, существует надстройка над matplotlib под названием
+\href{https://jakevdp.github.io/PythonDataScienceHandbook/04.14-visualization-with-seaborn.html}{seaborn}.
+Иногда удобнее и красивее делать визуализации через неё.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
