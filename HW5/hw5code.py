@@ -27,7 +27,22 @@ def find_best_split(feature_vector, target_vector):
     """
     # ╰( ͡° ͜ʖ ͡° )つ──☆*:・ﾟ
 
-    pass
+    sorted_values = np.sort(feature_vector)
+    thresholds = (sorted_values[:-1] + sorted_values[1:]) / 2
+
+    cmp_matrix_r = np.less.outer(thresholds, feature_vector)
+    cmp_matrix_l = 1 - cmp_matrix_r
+    l_lens = np.arange(1, len(target_vector))
+    r_lens = np.arange(len(target_vector) - 1, 0, -1)
+    p_1_l = cmp_matrix_l.dot(target_vector) / l_lens
+    p_0_l = 1 - p_1_l
+    p_1_r = cmp_matrix_r.dot(target_vector) / r_lens
+    p_0_r = 1 - p_1_r
+    H_l = 2 * p_0_l * p_1_l
+    H_r = 2 * p_0_r * p_1_r
+    Q = -(H_l * l_lens + H_r * r_lens) / len(target_vector)
+    best_ind = np.argmax(Q)
+    return thresholds, Q, thresholds[best_ind], Q[best_ind]
 
 
 class DecisionTree:
