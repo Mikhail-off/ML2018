@@ -3,4 +3,6 @@ HW*/.*
 Kaggle*/.*
 HW*/trash
 Kaggle*/trash
-HW*/data
+HW*/data*
+HW*/temp*
+HW*/_*

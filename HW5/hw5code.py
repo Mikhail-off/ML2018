@@ -30,10 +30,10 @@ def find_best_split(feature_vector, target_vector):
     sorted_values = np.sort(feature_vector)
     thresholds = (sorted_values[:-1] + sorted_values[1:]) / 2
 
-    cmp_matrix_r = np.less.outer(thresholds, feature_vector)
-    cmp_matrix_l = 1 - cmp_matrix_r
+    cmp_matrix_l = np.tri(len(target_vector) - 1, len(target_vector), dtype=np.bool)
+    cmp_matrix_r = ~cmp_matrix_l
     l_lens = np.arange(1, len(target_vector))
-    r_lens = np.arange(len(target_vector) - 1, 0, -1)
+    r_lens = len(target_vector) - l_lens
     p_1_l = cmp_matrix_l.dot(target_vector) / l_lens
     p_0_l = 1 - p_1_l
     p_1_r = cmp_matrix_r.dot(target_vector) / r_lens
