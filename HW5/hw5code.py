@@ -79,7 +79,7 @@ class DecisionTree:
                         current_click = 0
                     ratio[key] = current_click / current_count
                 categories_map = ratio
-                feature_vector = np.array(list(map(lambda x: categories_map[x], sub_X[:, feature])))
+                feature_vector = np.array(list(map(lambda x: categories_map.get(x, 0), sub_X[:, feature])))
             else:
                 raise ValueError
 
